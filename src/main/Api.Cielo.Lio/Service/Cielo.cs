@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web;
 using Api.Cielo.Lio.Domain.Dto;
@@ -11,6 +13,9 @@ using Api.Cielo.Lio.Infrastructure.Settings;
 using RestSharp;
 namespace Api.Cielo.Lio.Service
 {
+    /// <summary>
+    ///     Classe principal para requisição, consultas e cancelamentos de ordens.
+    /// </summary>
     public class Cielo : ICielo
     {
         private readonly RestClient _client;
@@ -24,6 +29,12 @@ namespace Api.Cielo.Lio.Service
             _client = new RestClient();
         }
 
+        /// <summary>
+        ///     Configura o ambiente com a Cielo
+        /// </summary>
+        /// <param name="merchantId"></param>
+        /// <param name="merchantKey"></param>
+        /// <param name="environment"></param>
         public void ConfigureEnvironment(string merchantId, string merchantKey, EnvironmentEnumerator environment)
         {
             Environment = environment;
@@ -32,15 +43,20 @@ namespace Api.Cielo.Lio.Service
             _client.BaseUrl = environment == EnvironmentEnumerator.Production ? new Uri(EnvironmentSettings.Production.RequestUrl) : new Uri(EnvironmentSettings.Sandbox.RequestUrl);
         }
 
+        /// <summary>
+        ///     Envia a requisição de pagamento para o ambiente da Cielo
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
         public Response SendSaleOrder(Transaction transaction)
         {
             OrderRequest orderRequest = null;
 
             if (transaction.Customer == null)
-                throw new ArgumentException("Customer Not Found!");
+                return Error("Customer Not Found!");
 
             if (transaction.PaymentMethod == null)
-                throw new ArgumentException("Payment Method Not Found!");
+                return Error("Payment Method Not Found!");
 
             switch (transaction.PaymentMethod.Type)
             {
@@ -55,12 +71,12 @@ namespace Api.Cielo.Lio.Service
                 case PaymentTypeEnumerator.Boleto:
                     break;
                 default:
-                    throw new ArgumentException("Payment Type Not Found!");
+                   return Error("Payment Method Type Not Found!");
             }    
             
             var result = Request<Response>("/1/sales/", Method.POST, orderRequest);
-            result.ReturnCode = result.Payment.ReturnCode;
-            result.ReturnMessage = result.Payment.ReturnMessage;
+            result.Code = result.Payment?.ReturnCode ?? result.Code;
+            result.Message = result.Payment?.ReturnMessage ?? result.Message;
 
             return result;
         }
@@ -75,10 +91,15 @@ namespace Api.Cielo.Lio.Service
 
             var response = _client.Execute(request);
 
-            if (response.StatusCode != HttpStatusCode.Created)
-                throw new HttpException((int)response.StatusCode, response.StatusDescription);
+            if (response.StatusCode == HttpStatusCode.Created) return response.Content.GetJson<T>();
 
-            return response.Content.GetJson<T>();
+            var result = response.Content.GetJson<IList<T>>();
+            return result.First();
+        }
+
+        private Response Error(string message)
+        {
+            return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message =  message};
         }
 
     }

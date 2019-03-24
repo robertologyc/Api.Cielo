@@ -65,7 +65,6 @@
     <Compile Include="Domain\Extensions\StringExtensions.cs" />
     <Compile Include="Domain\Modules\Commercial\Factories\OrderFactory.cs" />
     <Compile Include="Domain\Modules\Commercial\Interfaces\IOrder.cs" />
-    <Compile Include="Domain\Modules\Commercial\OrderResponse.cs" />
     <Compile Include="Domain\Modules\Commercial\OrderRequest.cs" />
     <Compile Include="Domain\Modules\Payment\DebitCard.cs" />
     <Compile Include="Domain\Modules\Payment\CreditCard.cs" />
