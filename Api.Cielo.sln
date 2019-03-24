@@ -3,11 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Cielo.Lio", "Api.Cielo.Lio\Api.Cielo.Lio.csproj", "{50F16CAC-A0C8-4FC7-A70D-C5591B85AE8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Cielo.Lio", "src\main\Api.Cielo.Lio\Api.Cielo.Lio.csproj", "{50F16CAC-A0C8-4FC7-A70D-C5591B85AE8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{E7BD68E4-B176-41FE-936A-7D2785AC87EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Cielo.Lio.Web", "Api.Cielo.Lio.Web\Api.Cielo.Lio.Web.csproj", "{3EE213B3-296B-43D0-99BB-95B6D5C4BEC0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{281BE39D-7BB9-44F2-8CEF-8018EAA396D1}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84EBD525-A4A8-4740-A637-11BF1948F18E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{6D6B2263-FA5A-456C-B3B8-E21DFFA67A6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Cielo.Lio.Web", "src\main\Api.Cielo.Lio.Web\Api.Cielo.Lio.Web.csproj", "{3EE213B3-296B-43D0-99BB-95B6D5C4BEC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +39,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{50F16CAC-A0C8-4FC7-A70D-C5591B85AE8B} = {6D6B2263-FA5A-456C-B3B8-E21DFFA67A6A}
+		{E7BD68E4-B176-41FE-936A-7D2785AC87EA} = {6D6B2263-FA5A-456C-B3B8-E21DFFA67A6A}
+		{6D6B2263-FA5A-456C-B3B8-E21DFFA67A6A} = {84EBD525-A4A8-4740-A637-11BF1948F18E}
 		{3EE213B3-296B-43D0-99BB-95B6D5C4BEC0} = {E7BD68E4-B176-41FE-936A-7D2785AC87EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
