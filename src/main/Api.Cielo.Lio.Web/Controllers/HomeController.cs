@@ -28,7 +28,7 @@ namespace Api.Cielo.Lio.Web.Controllers
                 Customer = new Customer
                 {
                     Name = "Roberto da Silva",
-                    Birthdate = new DateTime(2020,9,12)
+                    Birthdate = new DateTime(2019,9,12)
                 },
                 Amount = (decimal) 1500.50,
                 PaymentMethod = new PaymentMethod(new CreditCard
