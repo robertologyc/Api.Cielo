@@ -62,9 +62,8 @@ namespace Api.Cielo.Lio.Service
                     orderRequest = new OrderFactory().CreateOrderRequestDebitCard(transaction, Environment);
                     break;
                 case PaymentTypeEnumerator.EletronicTransfer:
-                    break;
                 case PaymentTypeEnumerator.Boleto:
-                    break;
+                    return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message = "Método de pagamento não implementado." };
                 default:
                     return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message = "Tipo de pagamento não encontrado." };
             }
