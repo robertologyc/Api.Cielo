@@ -54,6 +54,7 @@
     <Compile Include="Domain\Dto\DebitCard.cs" />
     <Compile Include="Domain\Dto\CreditCard.cs" />
     <Compile Include="Domain\Enums\ReturnCodeEnumerator.cs" />
+    <Compile Include="Domain\Interfaces\IValidate.cs" />
     <Compile Include="Domain\Modules\Payment\Factories\PaymentMethod.cs" />
     <Compile Include="Domain\Dto\Response.cs" />
     <Compile Include="Domain\Dto\Transaction.cs" />

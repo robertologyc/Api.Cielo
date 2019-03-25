@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using Api.Cielo.Lio.Domain.Dto;
 using Api.Cielo.Lio.Domain.Enums;
 using Api.Cielo.Lio.Domain.Extensions;
@@ -50,30 +49,26 @@ namespace Api.Cielo.Lio.Service
         /// <returns></returns>
         public Response SendSaleOrder(Transaction transaction)
         {
+            if (!transaction.IsValid())
+                return new Response { Code = transaction.Code, Message = transaction.Message };
+
             OrderRequest orderRequest = null;
-
-            if (transaction.Customer == null)
-                return Error("Customer Not Found!");
-
-            if (transaction.PaymentMethod == null)
-                return Error("Payment Method Not Found!");
-
             switch (transaction.PaymentMethod.Type)
             {
                 case PaymentTypeEnumerator.CreditCard:
                     orderRequest = new OrderFactory().CreateOrderRequestCreditCard(transaction);
                     break;
                 case PaymentTypeEnumerator.DebitCard:
-                    orderRequest = new OrderFactory().CreateOrderRequestDebitCard(transaction, Environment);                   
+                    orderRequest = new OrderFactory().CreateOrderRequestDebitCard(transaction, Environment);
                     break;
                 case PaymentTypeEnumerator.EletronicTransfer:
                     break;
                 case PaymentTypeEnumerator.Boleto:
                     break;
                 default:
-                   return Error("Payment Method Type Not Found!");
-            }    
-            
+                    return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message = "Tipo de pagamento não encontrado." };
+            }
+
             var result = Request<Response>("/1/sales/", Method.POST, orderRequest);
             result.Code = result.Payment?.ReturnCode ?? result.Code;
             result.Message = result.Payment?.ReturnMessage ?? result.Message;
@@ -96,11 +91,5 @@ namespace Api.Cielo.Lio.Service
             var result = response.Content.GetJson<IList<T>>();
             return result.First();
         }
-
-        private Response Error(string message)
-        {
-            return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message =  message};
-        }
-
     }
 }
