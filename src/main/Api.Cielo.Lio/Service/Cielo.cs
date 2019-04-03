@@ -69,6 +69,17 @@ namespace Api.Cielo.Lio.Service
             }
 
             var result = Request<Response>("/1/sales/", Method.POST, orderRequest);
+
+            if (result == null)
+            {
+                result = new Response
+                {
+                    Code = ReturnCodeEnumerator.ApiInternalError,
+                    Message = "Loja não autorizada para acesso a API."
+                };
+                return result;
+            }
+
             result.Code = result.Payment?.ReturnCode ?? result.Code;
             result.Message = result.Payment?.ReturnMessage ?? result.Message;
 
@@ -85,8 +96,8 @@ namespace Api.Cielo.Lio.Service
 
             var response = _client.Execute(request);
 
-            if (response.StatusCode == HttpStatusCode.Created) return response.Content.GetJson<T>();
-
+            if (response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.Unauthorized) return response.Content.GetJson<T>();
+            
             var result = response.Content.GetJson<IList<T>>();
             return result.First();
         }

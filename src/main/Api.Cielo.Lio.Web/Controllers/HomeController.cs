@@ -10,12 +10,12 @@ namespace Api.Cielo.Lio.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private const string MerchantId = "66c1f51f-c1c2-474e-b353-9b5e6e0926ec";
-        private const string MerchantKey = "ZSDXVGCQCIWKPSXUUFRZYYOKMTNGBPZXVBWKMKSO";
+        private const string MerchantId = "74e80721-83bf-4d7d-885c-c2f987392835";
+        private const string MerchantKey = "gqpy8H6jkwFJFeoMjCfBxpqza0w93B1iiwKyb0JG";
         private ICielo CieloRequest { get; }
         public HomeController(ICielo cieloRequest)
         {
-            cieloRequest.ConfigureEnvironment(MerchantId, MerchantKey, EnvironmentEnumerator.Sandbox);
+            cieloRequest.ConfigureEnvironment(MerchantId, MerchantKey, EnvironmentEnumerator.Production);
             CieloRequest = cieloRequest;           
         }
 

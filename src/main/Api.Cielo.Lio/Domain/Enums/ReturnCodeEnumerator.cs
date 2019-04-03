@@ -483,6 +483,10 @@
         /// <summary>
         ///     Contém nomes duplicados
         /// </summary>
-        ExtraDataCollectionContainsOneOrMoreDuplicatedNames = 187
+        ExtraDataCollectionContainsOneOrMoreDuplicatedNames = 187,
+        /// <summary>
+        ///     Não autorizada
+        /// </summary>
+        KA
     }
 }
