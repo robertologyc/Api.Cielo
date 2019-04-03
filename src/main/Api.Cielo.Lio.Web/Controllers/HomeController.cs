@@ -10,8 +10,8 @@ namespace Api.Cielo.Lio.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private const string MerchantId = "74e80721-83bf-4d7d-885c-c2f987392835";
-        private const string MerchantKey = "gqpy8H6jkwFJFeoMjCfBxpqza0w93B1iiwKyb0JG";
+        private const string MerchantId = "YOUR MERCHANT ID";
+        private const string MerchantKey = "YOUR MERCHANT KEY";
         private ICielo CieloRequest { get; }
         public HomeController(ICielo cieloRequest)
         {
