@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace Api.Cielo.Lio.Domain.Extensions
 {
@@ -7,7 +6,7 @@ namespace Api.Cielo.Lio.Domain.Extensions
     {
         public static int OnlyNumbers(this decimal source)
         {
-            return Convert.ToInt32(source.ToString(CultureInfo.InvariantCulture).OnlyNumbers());
+            return Convert.ToInt32(source.ToString("N2").OnlyNumbers());
         }
     }
 }
