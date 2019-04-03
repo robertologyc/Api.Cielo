@@ -15,7 +15,7 @@ namespace Api.Cielo.Lio.Web.Controllers
         private ICielo CieloRequest { get; }
         public HomeController(ICielo cieloRequest)
         {
-            cieloRequest.ConfigureEnvironment(MerchantId, MerchantKey, EnvironmentEnumerator.Production);
+            cieloRequest.ConfigureEnvironment(MerchantId, MerchantKey, EnvironmentEnumerator.Sandbox);
             CieloRequest = cieloRequest;           
         }
 
@@ -46,10 +46,14 @@ namespace Api.Cielo.Lio.Web.Controllers
             
             var response = CieloRequest.SendSaleOrder(transaction);
 
-            
 
+            var status = response.Payment != null && 
+                         (response.Payment.Status == 1 || 
+                          response.Payment.Status == 2)
+                ? "Approved"
+                : "Denied";
 
-            return Content($"{response.Code} - {response.Message}");
+            return Content($"{response.Code} - {response.Message} - Order Status: {status}");
         }
     }
 }
