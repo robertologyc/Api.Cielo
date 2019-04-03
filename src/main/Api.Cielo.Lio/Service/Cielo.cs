@@ -63,9 +63,9 @@ namespace Api.Cielo.Lio.Service
                     break;
                 case PaymentTypeEnumerator.EletronicTransfer:
                 case PaymentTypeEnumerator.Boleto:
-                    return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message = "Método de pagamento não implementado." };
+                    return new Response { Code = "-1", Message = "Método de pagamento não implementado." };
                 default:
-                    return new Response { Code = ReturnCodeEnumerator.ApiInternalError, Message = "Tipo de pagamento não encontrado." };
+                    return new Response { Code = "-1", Message = "Tipo de pagamento não encontrado." };
             }
 
             var result = Request<Response>("/1/sales/", Method.POST, orderRequest);
@@ -74,7 +74,7 @@ namespace Api.Cielo.Lio.Service
             {
                 result = new Response
                 {
-                    Code = ReturnCodeEnumerator.ApiInternalError,
+                    Code = "-1",
                     Message = "Loja não autorizada para acesso a API."
                 };
                 return result;

@@ -26,35 +26,35 @@ namespace Api.Cielo.Lio.Domain.Modules.Payment
         public bool? SaveCard { get; set; }
         public BrandEnumerator Brand { get; set; }
 
-        public ReturnCodeEnumerator Code { get; set; }
+        public string Code { get; set; }
         public string Message { get; set; }
 
         public bool IsValid()
         {
             if (string.IsNullOrEmpty(CardNumber))
             {
-                Code = ReturnCodeEnumerator.ApiInternalError;
+                Code = "-1";
                 Message = "Número do cartão não pode ser branco";
                 return false;
             }
 
             if (string.IsNullOrEmpty(Holder))
             {
-                Code = ReturnCodeEnumerator.ApiInternalError;
+                Code = "-1";
                 Message = "Nome impresso no cartão não pode ser branco";
                 return false;
             }
 
             if (string.IsNullOrEmpty(ExpirationDate))
             {
-                Code = ReturnCodeEnumerator.ApiInternalError;
+                Code = "-1";
                 Message = "Data de validade do cartão não pode ser branco";
                 return false;
             }
 
             if (!string.IsNullOrEmpty(SecurityCode)) return true;
 
-            Code = ReturnCodeEnumerator.ApiInternalError;
+            Code = "-1";
             Message = "Código de segurança do cartão não pode ser branco";
             return false;
         }

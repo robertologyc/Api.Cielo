@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Api.Cielo.Lio.Domain.Enums;
 
 namespace Api.Cielo.Lio.Domain.Modules.Payment
 {
@@ -12,7 +11,7 @@ namespace Api.Cielo.Lio.Domain.Modules.Payment
         public string AuthorizationCode { get; set; }
         public string PaymentId { get; set; }
         public int? Status { get; set; }
-        public ReturnCodeEnumerator ReturnCode { get; set; }
+        public string ReturnCode { get; set; }
         public string ReturnMessage { get; set; }
         public IEnumerable<Link> Links { get; set; }
     }

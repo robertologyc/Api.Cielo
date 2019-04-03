@@ -45,7 +45,10 @@ namespace Api.Cielo.Lio.Web.Controllers
             };
             
             var response = CieloRequest.SendSaleOrder(transaction);
+
             
+
+
             return Content($"{response.Code} - {response.Message}");
         }
     }

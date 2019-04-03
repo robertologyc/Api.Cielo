@@ -16,12 +16,12 @@ namespace Api.Cielo.Lio.Domain.Dto
         public string SoftDescriptor { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
 
-        public ReturnCodeEnumerator Code { get; set; }
+        public string Code { get; set; }
         public string Message { get; set; }
 
         public bool IsValid()
         {
-            Code = ReturnCodeEnumerator.ApiInternalError;
+            Code = "-1";
 
             if (string.IsNullOrEmpty(MerchantOrderId))
             {

@@ -1,5 +1,4 @@
-﻿using Api.Cielo.Lio.Domain.Enums;
-using Api.Cielo.Lio.Domain.Modules.Payment;
+﻿using Api.Cielo.Lio.Domain.Modules.Payment;
 
 namespace Api.Cielo.Lio.Domain.Dto
 {
@@ -11,9 +10,9 @@ namespace Api.Cielo.Lio.Domain.Dto
         public PaymentResponse Payment { get; set; }
 
         /// <summary>
-        ///     <see cref="ReturnCodeEnumerator"/>
+        ///     Retorna o código da mensagem de retorno Cielo
         /// </summary>
-        public ReturnCodeEnumerator Code { get; set; }
+        public string Code { get; set; }
         
         /// <summary>
         ///     Retorna mensagem de erro enviada pela Cielo

@@ -27,12 +27,12 @@ namespace Api.Cielo.Lio.Domain.Modules.Payment
         public bool? SaveCard { get; set; }
         public BrandEnumerator Brand { get; set; }
 
-        public ReturnCodeEnumerator Code { get; set; }
+        public string Code { get; set; }
         public string Message { get; set; }
 
         public bool IsValid()
         {
-            Code = ReturnCodeEnumerator.ApiInternalError;
+            Code = "-1";
             if (string.IsNullOrEmpty(CardNumber))
             {
                 Message = "Número do cartão não pode ser branco";
