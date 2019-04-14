@@ -1,4 +1,4 @@
-## Api.Cielo.Lio
+## Api.Cielo
 
 Biblioteca de integração com a solução API da Cielo em .Net.
 
