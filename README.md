@@ -2,7 +2,7 @@
 
 Biblioteca de integração com a solução API da Cielo em .Net.
 
-A solução API da Cielo possibilita os lojistas fazerem a integração de pagamento de suas lojas.
+A solução API da Cielo possibilita os lojistas fazerem a integração de pagamento de suas lojas através do ambiente e-commerce.
 
 O objetivo dessa solução é facilitar e simplificar a chamada da integração Cielo.
 
